@@ -1,0 +1,20 @@
+  - name: Slave Node Setup
+  hosts: all
+  remote_user: ubuntu
+  become: yes
+
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+
+    - name: Create Jenkins Home Directory
+      file:
+        path: /home/ubuntu/jenkins_home
+        state: directory
+        mode: '0777'
+
+    - name: Install OpenJDK 17
+      apt:
+        name: openjdk-17-jdk
+        state: present  
